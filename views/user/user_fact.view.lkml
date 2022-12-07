@@ -72,7 +72,7 @@ view: user_fact {
       left join `eraser-blast-staging.game_data.events` gde
         on fa.rdg_id = gde.rdg_id
       where gde.created_at >= '2019-01-01'
-      and gde.user_type = 'external'
+      --and gde.user_type = 'external'
       and gde.country != 'ZZ'
       and coalesce(gde.install_version,'null') <> '-1'
       and fa.rn = 1
