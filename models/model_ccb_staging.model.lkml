@@ -1,5 +1,5 @@
 
-label: "Chum Chum Blast Staging"
+label: "CCB Staging"
 connection: "chum_chum_blast_staging"
 
 # include all the views
