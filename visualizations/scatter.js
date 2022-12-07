@@ -76,7 +76,8 @@ looker.plugins.visualizations.add({
 
 
 
-            for(let i = 2; i<queryResponse.fields.length; i++){
+            for(let i = 1; i<queryResponse.fields.length; i++){
+              console.log(queryResponse.fields[i].label,queryResponse.fields[i].name);
              series.push({
                name: queryResponse.fields[i].label_short || queryResponse.fields[i].label,
                data: data.map(row=>row[queryResponse.fields[i].name].value)
