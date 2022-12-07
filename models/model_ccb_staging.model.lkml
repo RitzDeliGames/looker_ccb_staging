@@ -41,7 +41,7 @@ datagroup: change_at_midnight {
 }
 
 explore: user_retention {
-  sql_always_where: ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} ;;
+  # sql_always_where: ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} ;;
   label: "Users"
   from: user_fact
   join: user_activity {
@@ -135,7 +135,7 @@ explore: user_retention {
 }
 
 explore: transactions {
-  sql_always_where: ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} and ${transaction_date} >= ${created_date};;
+  # sql_always_where: ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} and ${transaction_date} >= ${created_date};;
   from: transactions_new
   join: user_retention {
     from: user_fact
@@ -185,7 +185,7 @@ explore: transactions {
 }
 
 explore: rewards {
-  sql_always_where: ${reward_date} >= ${user_fact.created_date};;# and ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} ;;
+  # sql_always_where: ${reward_date} >= ${user_fact.created_date};;# and ${rdg_id} not in @{device_internal_tester_mapping} and ${rdg_id} not in @{purchase_exclusion_list} ;;
   from: rewards
   join: user_fact {
     type: left_outer
@@ -287,7 +287,7 @@ explore: churn_by_match_data {
 }
 
 explore: gameplay {
-  sql_always_where: ${event_date} >= ${user_fact.created_date};;#${rdg_id} not in @{device_internal_tester_mapping} and
+  # sql_always_where: ${event_date} >= ${user_fact.created_date};;#${rdg_id} not in @{device_internal_tester_mapping} and
   from: round_end
   join: user_fact {
     type: left_outer
