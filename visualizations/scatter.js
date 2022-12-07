@@ -57,16 +57,12 @@ looker.plugins.visualizations.add({
           //     min_dimensions: 1, max_dimensions: 1,
           //     min_measures: 5, max_measures: 5,
           // })) return;
-        /*  console.log("data", data);
+          console.log("data", data);
           console.log("config", config);
           console.log("queryResponse", queryResponse);
 
           let x_dim = queryResponse.fields.dimensions[0];
-          let min = queryResponse.fields.measures[0];
-          let q25 = queryResponse.fields.measures[1];
-          let med = queryResponse.fields.measures[2];
-          let q75 = queryResponse.fields.measures[3];
-          let max = queryResponse.fields.measures[4];
+          let y_dim = queryResponse.fields.measures[0] || queryResponse.fields.dimensions[1];
 
 
           let categories = [];
@@ -77,7 +73,7 @@ looker.plugins.visualizations.add({
 
           console.log("categories", categories);
 
-          let series = [];
+        /*  let series = [];
           let pivotCount = 0;
           // If there is a pivot create stacked series
           if(queryResponse.pivots) {
