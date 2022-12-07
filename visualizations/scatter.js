@@ -63,24 +63,24 @@ looker.plugins.visualizations.add({
 
           let x_dim = queryResponse.fields.dimensions[0];
           let y_dim = queryResponse.fields.dimensions[1];
-
+          let series = [];
 
           let categories = [];
           // Get array of x axis categories
-          data.forEach(function(row){
+          data.forEach(row=>{
               categories.push(row[x_dim.name].value);
           });
 
           console.log("categories", categories);
 
-          let series = [];
+
 
 
             for(let i = 2; i<queryResponse.fields.length; i++){
              series.push({
                name: queryResponse.fields[i].label,
                data: data.map(row=>row[i].value)
-             })
+             });
             }
 
         /*  let series = [];
@@ -250,8 +250,8 @@ looker.plugins.visualizations.add({
                       return this.value >= 0 ? config.yAxisLabelFormat + this.value : '-' + config.yAxisLabelFormat + (-this.value);
                     }
                   }
-              },
-              series: series*/
+              },*/
+              series: series
           };
 
           //Add functionality to have the legend reflect the fill color instead of the outline color
