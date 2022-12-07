@@ -70,7 +70,10 @@ looker.plugins.visualizations.add({
           for(let i = 0; i<serFields.length; i++){
              series.push({
                name: serFields[i].label_short || serFields[i].label,
-               data: data.map(row=>row[serFields[i].name].value)
+               data: data.map(row=>row[serFields[i].name].value),
+                marker: {
+                  symbol: 'circle'
+                }
              });
             }
 
@@ -225,7 +228,10 @@ looker.plugins.visualizations.add({
               credits: {
                   enabled: false
               },
-              chart: {type: "scatter"},
+              chart: {
+                type: "scatter",
+                zoomType: 'xy'
+              },
               title: {text: ""},
               legend: {
                   layout: 'horizontal',
