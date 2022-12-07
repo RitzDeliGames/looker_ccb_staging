@@ -214,10 +214,10 @@ looker.plugins.visualizations.add({
 
 
 
-      });
+      });*/
 
       this.trigger('registerOptions', option); // register options with parent page to update visConfig
-*/
+
 
           // Set Chart Options
           let options = {
@@ -234,7 +234,7 @@ looker.plugins.visualizations.add({
                   enabled: config.showLegend
               },
 
-            /*  xAxis: {
+              xAxis: {
                   type: x_dim.is_timeframe ? "datetime" : null,
                   title: {
                       text: config.xAxisName || x_dim.label_short,
@@ -246,15 +246,15 @@ looker.plugins.visualizations.add({
                   min: config.yAxisMinValue,
                   max: config.yAxisMaxValue,
                   title: {
-                      text: config.yAxisName || med.field_group_label,
+                      text: config.yAxisName || y_dim.label_short,
                       enabled: config.showYName,
                   },
-                  labels: {
+                  /*labels: {
                     formatter: function() {
                       return this.value >= 0 ? config.yAxisLabelFormat + this.value : '-' + config.yAxisLabelFormat + (-this.value);
                     }
-                  }
-              },*/
+                  }*/
+              },
               series: series
           };
 
