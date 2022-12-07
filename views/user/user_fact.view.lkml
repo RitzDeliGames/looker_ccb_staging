@@ -11,9 +11,9 @@ view: user_fact {
         ,platform
         ,country
         ,row_number() over (partition by rdg_id order by timestamp asc) rn
-      from `eraser-blast.game_data.events`
+      from `eraser-blast-staging.game_data.events`
       where date(created_at) between '2019-01-01' and current_date()
-      and user_type = 'external'
+      --and user_type = 'external'
       and country != 'ZZ'
       and coalesce(install_version,'null') <> '-1')
 
@@ -69,7 +69,7 @@ view: user_fact {
         ,min(cast(json_extract_scalar(tickets,"$.SKILL") as numeric)) skill_ticket_balance_min
         ,min(cast(json_extract_scalar(tickets,"$.LEVEL") as numeric)) level_ticket_balance_min
       from first_activity fa
-      left join `eraser-blast.game_data.events` gde
+      left join `eraser-blast-staging.game_data.events` gde
         on fa.rdg_id = gde.rdg_id
       where gde.created_at >= '2019-01-01'
       and gde.user_type = 'external'

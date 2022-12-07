@@ -11,10 +11,10 @@ view: rewards {
         ,json_extract_scalar(extra_json,'$.reward_event') reward_event
         ,json_extract_scalar(extra_json,'$.reward_type') reward_type
         ,cast(json_extract_scalar(extra_json,'$.reward_amount') as int64) reward_amount
-      from game_data.events
+      from eraser-blast-staging.game_data.events
       where event_name = 'reward'
       and date(timestamp) between '2022-06-01' and current_date()
-      and user_type = 'external'
+      --and user_type = 'external'
       and country != 'ZZ'
       and coalesce(install_version,'null') <> '-1'
     ;;

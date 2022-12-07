@@ -6,7 +6,7 @@ view: singular_daily_agg_export {
             Country country_name
             ,Alpha_2_code country
             ,Alpha_3_code
-          from `eraser-blast.singular.country_codes`
+          from `eraser-blast-staging.singular.country_codes`
           ),
         singular_export as (
           select
@@ -23,7 +23,7 @@ view: singular_daily_agg_export {
             ,cast(adn_original_cost as float64) AS original_spend
             ,cast(adn_installs AS int64) AS installs
             ,timestamp(date) date_time --is this still needed if we are importing from Singular rather than FB?
-          from `eraser-blast.singular.marketing_data`)
+          from `eraser-blast-staging.singular.marketing_data`)
         select country_code_helper.*, singular_export.*
         from singular_export
         join country_code_helper

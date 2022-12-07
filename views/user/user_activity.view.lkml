@@ -6,9 +6,9 @@ view: user_activity {
         rdg_id
         ,user_id
         ,timestamp_trunc(timestamp,day) activity
-      from `eraser-blast.game_data.events`
+      from `eraser-blast-staging.game_data.events`
       where date(created_at) between '2019-01-01' and current_date()
-      and user_type = 'external'
+      --and user_type = 'external'
       group by 1,2,3
     ;;
     datagroup_trigger: change_6_hrs

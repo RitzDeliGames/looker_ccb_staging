@@ -8,9 +8,9 @@ view: churn_by_level_derived {
           ,churn_by_level_by_attempt.last_level_id last_level_id
           ,if(churn_by_level_by_attempt.round_id < churn_by_level_by_attempt.greater_round_id,'played_again','stuck') churn
           ,count(distinct churn_by_level_by_attempt.rdg_id) player_count
-        from `eraser-blast.looker_scratch.6Y_ritz_deli_games_churn_by_level_by_attempt` as churn_by_level_by_attempt
-          left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact on churn_by_level_by_attempt.rdg_id = user_fact.rdg_id
-          left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_last_event` as user_last_event on churn_by_level_by_attempt.rdg_id = user_last_event.rdg_id
+        from `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_churn_by_level_by_attempt` as churn_by_level_by_attempt
+          left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact on churn_by_level_by_attempt.rdg_id = user_fact.rdg_id
+          left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_last_event` as user_last_event on churn_by_level_by_attempt.rdg_id = user_last_event.rdg_id
         where {% condition variant %} json_extract_scalar(user_last_event.experiments,{% parameter experiment %}) {% endcondition %}
           and {% condition install_version %} cast(install_version as int64) {% endcondition %}
           and {% condition config_timestamp %} churn_by_level_by_attempt.config_timestamp {% endcondition %}
@@ -30,9 +30,9 @@ view: churn_by_level_derived {
         ,churn_by_level_by_attempt.last_level_id last_level_id
         ,approx_quantiles(churn_by_level_by_attempt.round_length, 100) [offset(50)] round_length
         ,count(distinct churn_by_level_by_attempt.rdg_id) player_count_total
-      from `eraser-blast.looker_scratch.6Y_ritz_deli_games_churn_by_level_by_attempt` as churn_by_level_by_attempt
-        left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact on churn_by_level_by_attempt.rdg_id = user_fact.rdg_id
-        left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_last_event` as user_last_event on churn_by_level_by_attempt.rdg_id = user_last_event.rdg_id
+      from `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_churn_by_level_by_attempt` as churn_by_level_by_attempt
+        left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact on churn_by_level_by_attempt.rdg_id = user_fact.rdg_id
+        left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_last_event` as user_last_event on churn_by_level_by_attempt.rdg_id = user_last_event.rdg_id
       where {% condition variant %} json_extract_scalar(user_last_event.experiments,{% parameter experiment %}) {% endcondition %}
         and {% condition install_version %} cast(install_version as int64) {% endcondition %}
         and {% condition config_timestamp %} churn_by_level_by_attempt.config_timestamp {% endcondition %}

@@ -14,10 +14,10 @@ view: user_last_event {
                  rdg_id
                 ,event_name
                 ,max(timestamp) last_ts
-              from game_data.events
+              from eraser-blast-staging.game_data.events
               where date(timestamp) between '2022-06-01'and current_date()
                 and rdg_id is not null
-                and user_type = 'external'
+                --and user_type = 'external'
               group by 1,2
             ) x
           )
@@ -27,7 +27,7 @@ view: user_last_event {
             ,last_level_id
             ,cast(last_level_serial as int64) last_level_serial
           from last_user_event
-          inner join game_data.events
+          inner join eraser-blast-staging.game_data.events
             on last_user_event.rdg_id = events.rdg_id
             and last_user_event.last_ts = events.timestamp
             and last_user_event.event_name = events.event_name

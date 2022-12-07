@@ -14,10 +14,10 @@ view: churn_by_match_made {
         ,json_extract_scalar(extra_json,'$.objective_2') objective_2
         ,json_extract_scalar(extra_json,'$.objective_3') objective_3
         ,json_extract_scalar(extra_json,'$.moves') moves_remaining
-      from game_data.events
+      from eraser-blast-staging.game_data.events
       where event_name = 'match_made'
       and timestamp >= '2022-06-01'
-      and user_type = 'external'
+      --and user_type = 'external'
       and country != 'ZZ'
     ;;
     datagroup_trigger: change_6_hrs

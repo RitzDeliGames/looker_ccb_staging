@@ -17,8 +17,8 @@ view: weighted_fps {
                   ,fps.ms_per_frame
                   ,user_fact.install_version
                   ,coalesce(sum(fps.frame_count ), 0) fps_frame_count_sum
-              from `eraser-blast.looker_scratch.6Y_ritz_deli_games_fps` fps
-              left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_fact` user_fact
+              from `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_fps` fps
+              left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_fact` user_fact
                   on fps.rdg_id = user_fact.rdg_id
               where fps.event_name = 'round_end'
               group by 1,2,3,4
@@ -29,8 +29,8 @@ view: weighted_fps {
                   ,fps.last_level_serial
                   ,user_fact.install_version
                   ,COALESCE(SUM(fps.frame_count ), 0) fps_frame_count_sum
-              from `eraser-blast.looker_scratch.6Y_ritz_deli_games_fps` AS fps
-              left join `eraser-blast.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact
+              from `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_fps` AS fps
+              left join `eraser-blast-staging.looker_scratch.6Y_ritz_deli_games_user_fact` as user_fact
                   on fps.rdg_id = user_fact.rdg_id
               where fps.event_name = 'round_end'
               group by 1,2,3) fps_sum

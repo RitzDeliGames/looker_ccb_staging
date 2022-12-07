@@ -9,7 +9,7 @@ view: display_name_helper {
           ,last_value(display_name)
             over(partition by rdg_id order by timestamp asc
             rows between unbounded preceding and unbounded following) current_display_name
-        from `eraser-blast.game_data.events`
+        from `eraser-blast-staging.game_data.events`
         where date(timestamp) between '2019-01-01' and current_date()
           and event_name = 'round_end'
         order by 1, 2 asc)

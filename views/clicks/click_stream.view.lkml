@@ -19,11 +19,11 @@ view: click_stream {
         ,last_level_id
         ,lag(timestamp)
             over (partition by rdg_id order by timestamp desc) greater_level_completed
-      from `eraser-blast.game_data.events`
+      from `eraser-blast-staging.game_data.events`
       where
         event_name = 'ButtonClicked'
         and timestamp >= '2022-06-01'
-        and user_type = 'external'
+        --and user_type = 'external'
         and country != 'ZZ'
         and coalesce(install_version,'null') <> '-1'
       group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15

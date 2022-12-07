@@ -1,7 +1,7 @@
 view: android_device_helper {
   derived_table: {
     sql:  select *
-          from `eraser-blast.game_data.supported_devices`
+          from `eraser-blast-staging.game_data.supported_devices`
           where retail_name != "Retail Branding"
        ;;
   }

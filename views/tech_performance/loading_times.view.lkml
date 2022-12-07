@@ -9,10 +9,10 @@ view: loading_times {
       ,cast(json_extract_scalar(extra_json, '$.load_time') as numeric) load_time
       ,json_extract_scalar(extra_json, '$.transition_from') transition_from
       ,json_extract_scalar(extra_json, '$.transition_to') transition_to
-    from game_data.events
+    from eraser-blast-staging.game_data.events
     where event_name = 'transition'
       and timestamp >= '2019-01-01'
-      and user_type = 'external'
+      --and user_type = 'external'
       and country != 'ZZ'
       and coalesce(install_version,'null') <> '-1'
     order by rdg_id, timestamp

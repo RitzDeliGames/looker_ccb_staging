@@ -6,9 +6,9 @@ view: performance_score {
           ,timestamp
           ,last_level_serial
           ,cast(json_extract_scalar(extra_json, "$.rendering_performance_score") as int64) rendering_performance_score
-        from `eraser-blast.game_data.events`
+        from `eraser-blast-staging.game_data.events`
         where timestamp >= '2022-06-01'
-          and user_type = 'external'
+          --and user_type = 'external'
           and country != 'ZZ'
         and event_name = 'TitleScreenAwake'
     ;;

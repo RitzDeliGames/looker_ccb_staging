@@ -5,9 +5,9 @@ view: user_activity_engagement_min {
         rdg_id
         ,timestamp_trunc(timestamp,day) activity
         ,engagement_ticks
-      from `eraser-blast.game_data.events`
+      from `eraser-blast-staging.game_data.events`
       where date(created_at) between '2019-01-01' and current_date()
-      and user_type = 'external'
+      --and user_type = 'external'
       and rdg_id not in ('accf512f-6b54-4275-95dd-2b0dd7142e9e')
       group by 1,2,3
     ;;

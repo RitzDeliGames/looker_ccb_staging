@@ -10,10 +10,10 @@ view: new_iam {
         ,json_extract_scalar(extra_json,'$.template_id') template_id
         ,json_extract_scalar(extra_json,'$.ui_action') ui_action
         ,extra_json
-      from game_data.events
+      from eraser-blast-staging.game_data.events
       where event_name = 'InAppMessaging'
         and timestamp >= '2022-06-01'
-        and user_type = 'external'
+        --and user_type = 'external'
         and country != 'ZZ'
         and coalesce(install_version,'null') <> '-1'
     ;;

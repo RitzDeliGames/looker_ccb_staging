@@ -7,7 +7,7 @@ view: android_advertising_id_helper {
         ,user_first_touch_timestamp
         ,date(timestamp_micros(user_first_touch_timestamp)) install_date
         --,row_number() over (partition by user_id order by event_timestamp asc) rn
-      from `eraser-blast.analytics_215101505.*`
+      from `eraser-blast-staging.analytics_215101505.*`
       where platform = 'ANDROID'
       and event_name = 'tutorial_begin'
       and user_id is not null

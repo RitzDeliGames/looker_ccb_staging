@@ -8,7 +8,7 @@ view: firebase_analytics {
                 ,timestamp_micros(user_first_touch_timestamp) created_at
                 ,event_name
                 ,timestamp_micros(event_timestamp) activity
-          from `eraser-blast.analytics_215101505.events_*`
+          from `eraser-blast-staging.analytics_215101505.events_*`
          where _TABLE_SUFFIX between FORMAT_DATE('%Y%m%d',{% date_start date_filter %}) and FORMAT_DATE('%Y%m%d',{% date_end date_filter %}) ;;
   }
 

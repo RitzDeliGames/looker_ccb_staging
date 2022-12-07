@@ -1,7 +1,7 @@
 view: erasers {
   derived_table: {
     sql: select *
-      from `eraser-blast.game_data.erasers`
+      from `eraser-blast-staging.game_data.erasers`
        ;;
   }
 

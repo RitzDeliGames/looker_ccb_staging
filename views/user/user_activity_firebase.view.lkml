@@ -9,7 +9,7 @@ view: user_activity_firebase {
         ,timestamp_micros(event_timestamp) activity
         ,datetime(timestamp_micros(event_timestamp),"America/Los_Angeles") activity_pst
         ,event_name
-      from `eraser-blast.analytics_215101505.events_*`
+      from `eraser-blast-staging.analytics_215101505.events_*`
       where _TABLE_SUFFIX between FORMAT_DATE('%Y%m%d',{% date_start date_filter %}) and FORMAT_DATE('%Y%m%d',{% date_end date_filter %})
       group by 1,2,3,4,5,6
     ;;

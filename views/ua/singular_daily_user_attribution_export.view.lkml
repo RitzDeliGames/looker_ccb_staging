@@ -13,7 +13,7 @@ view: singular_daily_user_attribution_export {
           ,campaign_name
           ,creative_id
           ,creative_name
-        from `eraser-blast.singular.user_level_attributions`
+        from `eraser-blast-staging.singular.user_level_attributions`
         where date(event_timestamp) >= '2021-06-01'
         ;;
     datagroup_trigger: change_6_hrs

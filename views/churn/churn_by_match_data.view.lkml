@@ -23,7 +23,7 @@ view: churn_by_match_data {
                       rows between 1 preceding AND 1 following
                   ) as int64) as greater_last_level_serial --does this need to include the round_end event so we can capture players that win the level?
           ,experiments
-        from `eraser-blast.game_data.events`
+        from `eraser-blast-staging.game_data.events`
         where user_type = 'external'
           and event_name = 'match_made'
           and timestamp >= '2022-06-01'

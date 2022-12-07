@@ -12,9 +12,9 @@ view: system_info {
           ,cast(json_extract_scalar(extra_json, "$.graphicsMemorySize") as int64) graphics_memory_size
           ,(select string_agg(json_extract_scalar(device_array, '$.screenWidth'), ' ,') from unnest(json_extract_array(devices)) device_array) screen_width
           ,(select string_agg(json_extract_scalar(device_array, '$.screenHeight'), ' ,') from unnest(json_extract_array(devices)) device_array) screen_height
-        from `eraser-blast.game_data.events`
+        from `eraser-blast-staging.game_data.events`
         where timestamp >= '2022-06-01'
-          and user_type = 'external'
+          --and user_type = 'external'
           and event_name = 'system_info'
     ;;
     datagroup_trigger: change_8_hrs

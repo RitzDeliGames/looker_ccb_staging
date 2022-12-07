@@ -10,10 +10,10 @@ view: fps {
       ,event_name
       ,json_extract_scalar(extra_json, "$.transition_from") scene_transition_from
       ,last_level_id
-    from game_data.events
+    from eraser-blast-staging.game_data.events
     cross join unnest(split(json_extract_scalar(extra_json,'$.frame_time_histogram_values'))) as frame_time_histogram with offset
     where timestamp >= '2022-06-01'
-      and user_type = 'external'
+      --and user_type = 'external'
       and country != 'ZZ'
       and coalesce(install_version,'null') <> '-1'
       and event_name in ('round_end','transition')
