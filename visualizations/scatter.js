@@ -67,10 +67,10 @@ looker.plugins.visualizations.add({
           let series = [];
           let categories = [];
 
-          for(let i = 0; i<serFields.length; i++){
+          for(let i = 0; i < serFields.length; i++){
              series.push({
                name: serFields[i].label_short || serFields[i].label,
-               data: data.map(row=>row[serFields[i].name].value),
+               data: data.map(row=>[row[x_dim.name].value, row[y_dim.name].value]),
                 marker: {
                   symbol: 'circle'
                 }
