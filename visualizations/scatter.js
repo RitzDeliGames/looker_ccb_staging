@@ -61,8 +61,8 @@ looker.plugins.visualizations.add({
           console.log("config", config);
           console.log("queryResponse", queryResponse);
 
-          let x_dim = queryResponse.fields.dimensions[0];
-          let y_dim = queryResponse.fields.dimensions[1];
+          let x_dim = queryResponse.fields.dimensions[1];
+          let y_dim = queryResponse.fields.dimensions[0];
           let serFields = queryResponse.fields.dimensions.slice(2);
           let series = [];
           let categories = [];
