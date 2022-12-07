@@ -62,7 +62,7 @@ looker.plugins.visualizations.add({
           console.log("queryResponse", queryResponse);
 
           let x_dim = queryResponse.fields.dimensions[0];
-          let y_dim = queryResponse.fields.measures[0] || queryResponse.fields.dimensions[1];
+          let y_dim = queryResponse.fields.dimensions[1];
 
 
           let categories = [];
@@ -72,6 +72,16 @@ looker.plugins.visualizations.add({
           });
 
           console.log("categories", categories);
+
+          let series = [];
+
+
+            for(let i = 2; i<queryResponse.fields.length; i++){
+             series.push({
+               name: queryResponse.fields[i].label,
+               data: data.map(row=>row[i].value)
+             })
+            }
 
         /*  let series = [];
           let pivotCount = 0;
@@ -110,12 +120,12 @@ looker.plugins.visualizations.add({
               });
               //Add the pivot name and associated measures to the series object
               series.push({
-                  name: med.field_group_label,
+                  name: y_dim.label,
                   data: dataArray,
                   fillColor: '#ffffff',
                   //legendColor: config.boxFillColors[0] || '#ffffff'
               });
-          }
+          }*/
 
           console.log("series", series);
 
@@ -125,7 +135,7 @@ looker.plugins.visualizations.add({
           label: "Axis Name",
           type: "string",
           default: "",
-          placeholder: med.field_group_label || "",
+          placeholder: y_dim.label_short || y_dim.label,
           section: "Y"
         },
         xAxisName: {
@@ -138,7 +148,7 @@ looker.plugins.visualizations.add({
      };
 
 
-    // Create options for each measure in your query
+    /*// Create options for each measure in your query
     series.forEach(function(serie) {
 
        id = typeof serie.name === "string" ? serie.name : serie.name.toString();
