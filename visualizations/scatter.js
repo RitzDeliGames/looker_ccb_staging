@@ -63,9 +63,18 @@ looker.plugins.visualizations.add({
 
           let x_dim = queryResponse.fields.dimensions[0];
           let y_dim = queryResponse.fields.dimensions[1];
+          let serFields = queryResponse.fields.dimensions.slice(2);
           let series = [];
-
           let categories = [];
+
+          for(let i = 0; i<serFields.length; i++){
+             series.push({
+               name: serFields[i].label_short || serFields[i].label,
+               data: data.map(row=>row[serFields[i].name].value)
+             });
+            }
+
+
           // Get array of x axis categories
           data.forEach(row=>{
               categories.push(row[x_dim.name].value);
@@ -76,13 +85,7 @@ looker.plugins.visualizations.add({
 
 
 
-            for(let i = 1; i<queryResponse.fields.length; i++){
-              console.log(queryResponse.fields[i].label,queryResponse.fields[i].name);
-             series.push({
-               name: queryResponse.fields[i].label_short || queryResponse.fields[i].label,
-               data: data.map(row=>row[queryResponse.fields[i].name].value)
-             });
-            }
+
 
         /*  let series = [];
           let pivotCount = 0;
