@@ -232,6 +232,9 @@ looker.plugins.visualizations.add({
                 type: "scatter",
                 zoomType: 'xy'
               },
+              lang: {
+                thousandsSep:""
+              },
               title: {text: ""},
               legend: {
                   layout: 'horizontal',
