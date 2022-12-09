@@ -233,7 +233,7 @@ looker.plugins.visualizations.add({
                 zoomType: 'xy'
               },
               lang: {
-                thousandsSep:""
+                thousandsSep:","
               },
               title: {text: ""},
               legend: {
