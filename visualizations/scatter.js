@@ -241,7 +241,6 @@ looker.plugins.visualizations.add({
               },
 
               xAxis: {
-                  type: x_dim.is_timeframe ? "datetime" : null,
                   title: {
                       text: config.xAxisName || x_dim.label_short,
                       enabled: config.showXName,
@@ -264,7 +263,10 @@ looker.plugins.visualizations.add({
                     }
                   }*/
               },
-              series: series
+              tooltip:{
+                pointFormat:"{config.xAxisName}: {point.x} <br/> {config.showYName}: {point.y}"
+              },
+              series
           };
 
           //Add functionality to have the legend reflect the fill color instead of the outline color
