@@ -264,7 +264,7 @@ looker.plugins.visualizations.add({
                   }*/
               },
               tooltip:{
-                pointFormat: config.xAxisName || x_dim.label_short + ": {point.x} <br/> " + config.yAxisName || y_dim.label_short + ": {point.y}"
+                pointFormat: (config.xAxisName || x_dim.label_short) + ": {point.x} <br/>" + (config.yAxisName || y_dim.label_short) + ": {point.y}"
               },
               series
           };
