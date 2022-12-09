@@ -246,7 +246,10 @@ looker.plugins.visualizations.add({
                       text: config.xAxisName || x_dim.label_short,
                       enabled: config.showXName,
                    },
-                   categories: categories
+                    startOnTick: true,
+                    endOnTick: true,
+                    showLastLabel: true,
+                  // categories: categories
               },
               yAxis: {
                   min: config.yAxisMinValue,
