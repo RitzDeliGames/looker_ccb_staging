@@ -61,17 +61,34 @@ looker.plugins.visualizations.add({
           console.log("config", config);
           console.log("queryResponse", queryResponse);
 
-          let x_dim = queryResponse.fields.dimensions[0];
-          let y_dim = queryResponse.fields.measures[0] || queryResponse.fields.dimensions[1];
-
-
+          let x_dim = queryResponse.fields.dimensions[1];
+          let y_dim = queryResponse.fields.dimensions[0];
+          let serFields = queryResponse.fields.dimensions.slice(2);
+          let series = [];
           let categories = [];
+
+          for(let i = 0; i < serFields.length; i++){
+             series.push({
+               name: serFields[i].label_short || serFields[i].label,
+               data: data.map(row=>[row[x_dim.name].value, row[y_dim.name].value]),
+                marker: {
+                  symbol: 'circle'
+                }
+             });
+            }
+
+
           // Get array of x axis categories
-          data.forEach(function(row){
+          data.forEach(row=>{
               categories.push(row[x_dim.name].value);
           });
 
           console.log("categories", categories);
+
+
+
+
+
 
         /*  let series = [];
           let pivotCount = 0;
@@ -110,12 +127,12 @@ looker.plugins.visualizations.add({
               });
               //Add the pivot name and associated measures to the series object
               series.push({
-                  name: med.field_group_label,
+                  name: y_dim.label,
                   data: dataArray,
                   fillColor: '#ffffff',
                   //legendColor: config.boxFillColors[0] || '#ffffff'
               });
-          }
+          }*/
 
           console.log("series", series);
 
@@ -125,7 +142,7 @@ looker.plugins.visualizations.add({
           label: "Axis Name",
           type: "string",
           default: "",
-          placeholder: med.field_group_label || "",
+          placeholder: y_dim.label_short || y_dim.label,
           section: "Y"
         },
         xAxisName: {
@@ -138,7 +155,7 @@ looker.plugins.visualizations.add({
      };
 
 
-    // Create options for each measure in your query
+    /*// Create options for each measure in your query
     series.forEach(function(serie) {
 
        id = typeof serie.name === "string" ? serie.name : serie.name.toString();
@@ -200,10 +217,10 @@ looker.plugins.visualizations.add({
 
 
 
-      });
+      });*/
 
       this.trigger('registerOptions', option); // register options with parent page to update visConfig
-*/
+
 
           // Set Chart Options
           let options = {
@@ -211,7 +228,13 @@ looker.plugins.visualizations.add({
               credits: {
                   enabled: false
               },
-              chart: {type: "scatter"},
+              chart: {
+                type: "scatter",
+                zoomType: 'xy'
+              },
+              lang: {
+                thousandsSep:","
+              },
               title: {text: ""},
               legend: {
                   layout: 'horizontal',
@@ -220,28 +243,33 @@ looker.plugins.visualizations.add({
                   enabled: config.showLegend
               },
 
-            /*  xAxis: {
-                  type: x_dim.is_timeframe ? "datetime" : null,
+              xAxis: {
                   title: {
                       text: config.xAxisName || x_dim.label_short,
                       enabled: config.showXName,
                    },
-                   categories: categories
+                    startOnTick: true,
+                    endOnTick: true,
+                    showLastLabel: true,
+                  // categories: categories
               },
               yAxis: {
                   min: config.yAxisMinValue,
                   max: config.yAxisMaxValue,
                   title: {
-                      text: config.yAxisName || med.field_group_label,
+                      text: config.yAxisName || y_dim.label_short,
                       enabled: config.showYName,
                   },
-                  labels: {
+                  /*labels: {
                     formatter: function() {
                       return this.value >= 0 ? config.yAxisLabelFormat + this.value : '-' + config.yAxisLabelFormat + (-this.value);
                     }
-                  }
+                  }*/
               },
-              series: series*/
+              tooltip:{
+                pointFormat: (config.xAxisName || x_dim.label_short) + ": {point.x} <br/>" + (config.yAxisName || y_dim.label_short) + ": {point.y}"
+              },
+              series
           };
 
           //Add functionality to have the legend reflect the fill color instead of the outline color
