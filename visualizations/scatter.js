@@ -221,6 +221,12 @@ looker.plugins.visualizations.add({
 
       this.trigger('registerOptions', option); // register options with parent page to update visConfig
 
+      Highcharts.setOptions({
+          lang: {
+              thousandsSep: ','
+          }
+      });
+
 
           // Set Chart Options
           let options = {
@@ -231,9 +237,6 @@ looker.plugins.visualizations.add({
               chart: {
                 type: "scatter",
                 zoomType: 'xy'
-              },
-              lang: {
-                thousandsSep:","
               },
               title: {text: ""},
               legend: {
