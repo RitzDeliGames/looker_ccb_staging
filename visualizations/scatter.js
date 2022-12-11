@@ -1,6 +1,6 @@
 looker.plugins.visualizations.add({
     id: "scatter",
-    label: "Scatter",
+    label: "Custom Scatterplot",
       options: {
           showLegend: {
               label: "Show Legend",

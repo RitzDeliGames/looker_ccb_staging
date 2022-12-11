@@ -806,7 +806,7 @@ visualization: {
 
 visualization: {
   id: "scatter"
-  label: "Scatter"
+  label: "Custom Scatterplot"
   dependencies: ["https://code.highcharts.com/highcharts.js"]
   file: "visualizations/scatter.js"
 }
