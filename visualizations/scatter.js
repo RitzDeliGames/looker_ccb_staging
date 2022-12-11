@@ -63,76 +63,28 @@ looker.plugins.visualizations.add({
 
           let x_dim = queryResponse.fields.dimensions[1];
           let y_dim = queryResponse.fields.dimensions[0];
-          let serFields = queryResponse.fields.dimensions.slice(2);
+          let seriesNames = queryResponse.fields.dimensions.slice(2);
           let series = [];
-          let categories = [];
+          //let categories = [];
 
-          for(let i = 0; i < serFields.length; i++){
-             series.push({
-               name: serFields[i].label_short || serFields[i].label,
-               data: data.map(row=>[row[x_dim.name].value, row[y_dim.name].value]),
-                marker: {
-                  symbol: 'circle'
-                }
-             });
-            }
+          for(let i = 0; i < seriesNames.length; i++){
+            series.push({
+              name: seriesNames[i].label_short || seriesNames[i].label,
+              data: data.map(row=>[row[x_dim.name].value, row[y_dim.name].value]),
+              marker: {
+                symbol: config[(seriesNames[i].label_short || seriesNames[i].label) + "_marker"]
+              },
+              color: config[(seriesNames[i].label_short || seriesNames[i].label) + "_color"]
+           });
+          }
 
 
           // Get array of x axis categories
-          data.forEach(row=>{
+          /*data.forEach(row=>{
               categories.push(row[x_dim.name].value);
           });
 
-          console.log("categories", categories);
-
-
-
-
-
-
-        /*  let series = [];
-          let pivotCount = 0;
-          // If there is a pivot create stacked series
-          if(queryResponse.pivots) {
-              //Loop through pivots to create stacks
-              queryResponse.pivots.forEach(function(pivot) {
-                  //loop through data to get the measures
-                  let dataArray = [];
-                  data.forEach(function(row){
-                      dataArray.push([row[min.name][pivot.key].value,
-                          row[q25.name][pivot.key].value,
-                          row[med.name][pivot.key].value,
-                          row[q75.name][pivot.key].value,
-                          row[max.name][pivot.key].value]);
-                  });
-                  //Add the pivot name and associated measures to the series object
-                  series.push({
-                      name: pivot.key,
-                      data: dataArray,
-                      color: config[pivot.key + "_outline"] || Highcharts.getOptions().colors[pivot.key],
-                      fillColor: config[pivot.key + "_fill"] || '#ffffff',
-                      //legendColor: config.boxFillColors[pivotCount] || '#000000'
-                  });
-                  pivotCount++;
-              });
-          } else {
-              let dataArray = [];
-              //loop through data to get the measures
-              data.forEach(function(row){
-                  dataArray.push([row[min.name].value,
-                      row[q25.name].value,
-                      row[med.name].value,
-                      row[q75.name].value,
-                      row[max.name].value]);
-              });
-              //Add the pivot name and associated measures to the series object
-              series.push({
-                  name: y_dim.label,
-                  data: dataArray,
-                  fillColor: '#ffffff',
-                  //legendColor: config.boxFillColors[0] || '#ffffff'
-              });
-          }*/
+          console.log("categories", categories);*/
 
           console.log("series", series);
 
@@ -155,40 +107,31 @@ looker.plugins.visualizations.add({
      };
 
 
-    /*// Create options for each measure in your query
+    // Create options for each measure in your query
     series.forEach(function(serie) {
 
        id = typeof serie.name === "string" ? serie.name : serie.name.toString();
-       offset = series.indexOf(serie) * 4;
+       offset = series.indexOf(serie) * 3;
 
        //set an invalid display type so only the label renders
-       option[id + "_label"] = {
-         label: id.toUpperCase(),
-         type: "string",
-         display: "label",
-         section: "Series",
-         order: offset + 1
-       };
+        option[id + "_label"] = {
+          label: id.toUpperCase(),
+          type: "string",
+          display: "label",
+          section: "Series",
+          order: offset + 1
+        };
 
-       option[id + "_outline"] = {
-        label: "Outline Color",
+      option[id + "_color"] = {
+        label: "Point Color",
         default: Highcharts.getOptions().colors[series.indexOf(serie)],
         section: "Series",
         type: "string",
         display: "color",
         order: offset + 2
-       };
+      };
 
-       option[id + "_fill"] = {
-        label: "Fill Color",
-        default: "#FFFFFF",
-        section: "Series",
-        type: "string",
-        display: "color",
-        order: offset + 3
-       };
-
-       option[id + "_marker"] = {
+      option[id + "_marker"] = {
         // see https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/plotoptions/series-marker-symbol/
         // and https://api.highcharts.com/highcharts/plotOptions.series.marker.symbol
         type: "string",
@@ -205,19 +148,9 @@ looker.plugins.visualizations.add({
         default: Highcharts.getOptions().symbols[series.indexOf(serie)] || "Point",
         section: "Series",
         order: offset + 3
-       };
-
-       option[id + "_hideMarker"] = {
-        type: "boolean",
-        label: "Hide Symbols",
-        section: "Series",
-        default: false,
-        order: offset + 4
       };
 
-
-
-      });*/
+    });
 
       this.trigger('registerOptions', option); // register options with parent page to update visConfig
 
@@ -274,17 +207,6 @@ looker.plugins.visualizations.add({
               },
               series
           };
-
-          //Add functionality to have the legend reflect the fill color instead of the outline color
-          /*(function(H) {
-              H.wrap(H.Legend.prototype, 'colorizeItem', function(proceed, item, visible) {
-                  var color = item.color;
-                  item.color = item.options.legendColor;
-                  proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-                  item.color = color;
-              });
-          }(Highcharts));*/
-
           // Instanciate Box Plot Highchart
           Highcharts.chart(element, options);
       }
