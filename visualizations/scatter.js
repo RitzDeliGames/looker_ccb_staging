@@ -223,7 +223,7 @@ looker.plugins.visualizations.add({
 
       Highcharts.setOptions({
           lang: {
-              thousandsSep: ','
+              thousandsSep: ''
           }
       });
 
