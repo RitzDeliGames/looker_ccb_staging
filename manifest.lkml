@@ -775,38 +775,3 @@ constant: game_mode_consolidated {
             else ${TABLE}.game_mode
           end"
 }
-
-visualization: {
-  id: "pivoted_boxplot"
-  label: "Pivoted Boxplot"
-  dependencies: ["https://code.highcharts.com/highcharts.js", "https://code.highcharts.com/highcharts-more.js"]
-  file: "visualizations/pivoted_boxplot.js"
-}
-
-visualization: {
-  id: "2d_boxplot"
-  label: "2D Boxplot"
-  dependencies: ["https://code.highcharts.com/highcharts.js", "https://code.highcharts.com/highcharts-more.js"]
-  file: "visualizations/2d_boxplot.js"
-}
-
-visualization: {
-  id: "2d_line"
-  label: "2D Line"
-  dependencies: ["https://code.highcharts.com/highcharts.js"]
-  file: "visualizations/2d_line.js"
-}
-
-visualization: {
-  id: "2d_column"
-  label: "2D Column"
-  dependencies: ["https://code.highcharts.com/highcharts.js"]
-  file: "visualizations/2d_column.js"
-}
-
-visualization: {
-  id: "scatter"
-  label: "Scatter"
-  dependencies: ["https://code.highcharts.com/highcharts.js"]
-  file: "visualizations/scatter.js"
-}
